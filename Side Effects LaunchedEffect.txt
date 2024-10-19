@@ -1,0 +1,39 @@
+//Side Effects | LaunchedEffect
+Asa side effects jo aap only one time use karna chahta ho and 
+ya agar apki koi condition meet ho jati hai tab aap karna chahta hoo.
+
+@Composable
+fun ListComposable(){
+   val categoryState = remember{ mutableStateOf(emptyList<String>())}
+
+   LaunchedEffect(key1 = Unit){ //this.CoroutineScope
+	categoryState.value = fetchCategories()
+   }
+
+   LazyColumn{
+	items(categoryState.value){ item ->
+		Text(text = item)
+	}
+   }
+}
+
+fun fetchCategories(): List<String>{
+     return listOf("One","Two","Three")
+}
+
+===============================================================================
+@Composable
+fun Counter(){
+   var count = remember { mutableStateOf(0) }
+   var key = count.value % 3 == 0
+   LaunchedEffect(key1 = key){ //this.CoroutineScope
+	Log.d("counter","Current count: ${count.value}")   
+   }
+   Button(onClick = {count.value++}){
+	Text("Increment count")
+   }
+}
+
+
+
+

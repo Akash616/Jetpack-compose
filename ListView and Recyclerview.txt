@@ -1,0 +1,91 @@
+setContent {
+   PreviewItem()
+}
+-----------------------------------------
+@Preview(heightDp = 500)
+@Composable
+fun PreviewItem() {
+    //Like listView
+    /*Column(
+        modifier = Modifier
+        .verticalScroll(state = rememberScrollState()) //scrolling
+    ) {
+        getCategoryList().map { item ->
+            BlogCategory(img = item.img, title = item.title, subtitle = item.subtitle)
+        }
+    }*/
+
+    //Like Recyclerview
+    LazyColumn(content = {
+        items(getCategoryList()) { item ->
+            BlogCategory(img = item.img, title = item.title, subtitle = item.subtitle)
+        }
+    })
+}
+
+@Composable  //Parameterized composable
+fun BlogCategory(img: Int, title: String, subtitle: String){
+    Card(
+        elevation = CardDefaults.cardElevation(8.dp),
+        modifier = Modifier.padding(8.dp)
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.padding(8.dp)
+        ) {
+            Image(
+                painter = painterResource(img),
+                contentDescription = "",
+                modifier = Modifier
+                    .size(48.dp)
+                    .padding(8.dp)
+                    .weight(.2f) //Row ka 20%
+            )
+            ItemDescription(title, subtitle,
+                Modifier
+                    .padding(end = 8.dp)
+                    .weight(.8f) //Row ka 80%
+            )
+        }
+    }
+}
+
+@Composable
+private fun ItemDescription(title: String, subtitle: String, modifier: Modifier) {
+    Column(
+        modifier = modifier
+    ) {
+        Text(
+            text = title,
+            style = MaterialTheme.typography.headlineMedium
+        )
+        Text(
+            text = subtitle,
+            style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.Thin
+        )
+    }
+}
+
+data class Category(val img: Int, val title: String, val subtitle: String)
+
+fun getCategoryList() : MutableList<Category>{
+    val list = mutableListOf<Category>()
+    list.add(Category(R.drawable.ic_add_reaction,"Programming","Learn Programming. Lang"))
+    list.add(Category(R.drawable.ic_airplanemode,"Technology","Learn Technology. Lang"))
+    list.add(Category(R.drawable.ic_android,"Android","Learn Android. Lang"))
+    list.add(Category(R.drawable.ic_launcher_background,"Graphics","Learn Graphics. Lang"))
+    list.add(Category(R.drawable.ic_add_reaction,"Programming","Learn Programming. Lang"))
+    list.add(Category(R.drawable.ic_airplanemode,"Technology","Learn Technology. Lang"))
+    list.add(Category(R.drawable.ic_android,"Android","Learn Android. Lang"))
+    list.add(Category(R.drawable.ic_launcher_background,"Graphics","Learn Graphics. Lang"))
+    list.add(Category(R.drawable.ic_add_reaction,"Programming","Learn Programming. Lang"))
+    list.add(Category(R.drawable.ic_airplanemode,"Technology","Learn Technology. Lang"))
+    list.add(Category(R.drawable.ic_android,"Android","Learn Android. Lang"))
+    list.add(Category(R.drawable.ic_launcher_background,"Graphics","Learn Graphics. Lang"))
+    list.add(Category(R.drawable.ic_add_reaction,"Programming","Learn Programming. Lang"))
+    list.add(Category(R.drawable.ic_airplanemode,"Technology","Learn Technology. Lang"))
+    list.add(Category(R.drawable.ic_android,"Android","Learn Android. Lang"))
+    list.add(Category(R.drawable.ic_launcher_background,"Graphics","Learn Graphics. Lang"))
+    return list
+}

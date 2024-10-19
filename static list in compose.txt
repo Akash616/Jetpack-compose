@@ -1,0 +1,32 @@
+@Preview(showBackground = true, name = "Hello Akash", showSystemUi = true)
+@Composable
+private fun PreviewFunction() {
+    Column {
+        //static list
+        ListViewItem(R.drawable.ic_android, "Akash Gupta","Android Developer")
+        ListViewItem(R.drawable.ic_airplanemode, "Akash Gupta","Android Developer")
+        ListViewItem(R.drawable.ic_add_reaction, "Akash Gupta","Android Developer")
+    }
+}
+
+@Composable
+fun ListViewItem(imgId: Int, name: String, occupation: String, modifier: Modifier) {
+    Row(modifier.padding(8.dp)) {
+        Image(
+            painter = painterResource(id = imgId),
+            contentDescription = "",
+            modifier = Modifier.size(40.dp) //Image size
+        )
+        Column {
+            Text(
+                text = name,
+                fontWeight = FontWeight.Bold
+            )
+            Text(
+                text = occupation,
+                fontWeight = FontWeight.Thin,
+                fontSize = 12.sp
+            )
+        }
+    }
+}

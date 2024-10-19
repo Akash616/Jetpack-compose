@@ -1,0 +1,30 @@
+//rememberCoroutineScope
+
+@Composable
+fun CoroutineScopeComposable(){
+   var counter = remember { mutableStateOf(0) }
+   var scope = rememberCoroutineScope()
+
+   var text = "Coroutine is running ${counter.value}"
+   if(counter.value == 10){
+        text = "Counter stopped"
+   }
+   Column{
+	Text(text)
+	Button(onClick = {
+            scope.launch{
+		Log.d("CoroutineScope","Started...")
+		try{
+		   for(i in 1 <= .. <= 10){
+			counter.value++
+			delay(1000)
+		   }
+		}catch(e: Exception){
+		   Log.d("CoroutineScope","Exception - ${e.message.toString()}")
+		}
+	    }
+	}){
+	    Text("Start")
+	}
+   }
+}

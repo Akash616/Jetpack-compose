@@ -1,0 +1,74 @@
+#Build-In Composable
+
+@Preview(showBackground = true, name = "Hello Akash", showSystemUi = true)
+@Composable
+---------------------------------------------------------------------------
+Text(
+        text = "Hello Akash",
+        fontStyle = FontStyle.Italic,
+        fontWeight = FontWeight.ExtraBold,
+        color = Color.Blue,
+        fontSize = 26.sp,
+        textAlign = TextAlign.Right
+    )
+----------------------------------------------------------------------------
+Image(
+        painter = painterResource(id = R.drawable.android),
+        contentDescription = "Dummy image",
+        colorFilter = ColorFilter.tint(Color.Blue),
+        contentScale = ContentScale.Crop
+    )
+--------------------------------------------------------------------------------
+Button(
+        onClick = {},
+        colors = ButtonDefaults.buttonColors(
+            contentColor = Color.White,
+            containerColor = Color.Black
+        ),
+        enabled = true
+    ) {
+        Text(text = "Akash Gupta")
+        Image(
+            painter = painterResource(id = R.drawable.android),
+            contentDescription = "Dummy"
+        )
+    }
+----------------------------------------------------------------------------------
+@Composable
+fun TextInput() {
+    val state = remember { mutableStateOf("") }
+    TextField(
+        value = state.value,
+        onValueChange = {
+            state.value = it
+        },
+        label = { Text(text = "Enter message") },
+        isError = true
+    )
+}
+------------------------------------------------------------------------------------
+Column( //Arrangement - how left space is divide b/w childs?
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceEvenly
+    ) {
+        Text(text = "A", fontSize = 26.sp)
+        Text(text = "B", fontSize = 26.sp)
+    }
+------------------------------------------------------------------------------------
+Row(
+        horizontalArrangement = Arrangement.SpaceAround,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(text = "A", fontSize = 26.sp)
+        Text(text = "B", fontSize = 26.sp)
+    }
+------------------------------------------------------------------------------------
+ Box(contentAlignment = Alignment.BottomEnd){
+        Image(painter = painterResource(id = R.drawable.ic_launcher_background), contentDescription = "")
+        Image(painter = painterResource(id = R.drawable.android), contentDescription = "")
+    }  //FrameLayout - like Stack
+------------------------------------------------------------------------------------
+
+
+
+
